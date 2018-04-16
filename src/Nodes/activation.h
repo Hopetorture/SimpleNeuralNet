@@ -6,7 +6,7 @@ class Activation
 {
 public:
     Activation(){}
-    virtual ~Activation() = 0;
+    virtual ~Activation(){}
     virtual fp operator()(const fp &in) = 0;
 };
 

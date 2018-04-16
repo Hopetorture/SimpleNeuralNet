@@ -2,13 +2,27 @@
 #define ACTIVATORSFACTORY_H
 #include <string>
 #include "activation.h"
-#include <map>
+#include "stubactivation.h"
+//#include <map>
+#include <memory>
 
 class ActivatorsFactory
 {
 public:
     ActivatorsFactory();
-    auto getActivator(ActivationFunctions f);
+    static auto getActivator(ActivationFunctions f)
+    {
+
+        switch(f){
+        case ActivationFunctions::ReLU:
+            break;
+        case ActivationFunctions::Sigmoid:
+            return std::unique_ptr<Activation>(new StubActivation());
+            //return std::make_unique<StubActivation>();
+        }
+
+        return std::unique_ptr<Activation>(new StubActivation());
+    }
 
 };
 
