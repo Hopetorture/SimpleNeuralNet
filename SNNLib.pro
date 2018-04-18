@@ -14,7 +14,9 @@ SOURCES += main.cpp \
     src/Nodes/stubactivation.cpp \
     src/Layers/layer.cpp \
     src/Layers/dense.cpp \
-    src/Nodes/simplenode.cpp
+    src/Nodes/simplenode.cpp \
+    src/Models/abstractmodel.cpp \
+    src/Models/model.cpp
 
 HEADERS += \
     src/Nodes/node.h \
@@ -24,4 +26,6 @@ HEADERS += \
     src/Nodes/stubactivation.h \
     src/Layers/layer.h \
     src/Layers/dense.h \
-    src/Nodes/simplenode.h
+    src/Nodes/simplenode.h \
+    src/Models/abstractmodel.h \
+    src/Models/model.h
