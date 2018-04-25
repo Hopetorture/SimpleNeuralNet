@@ -7,7 +7,7 @@ class SimpleNode : public Node
 {
 public:
     SimpleNode();
-    SimpleNode(fp b) : Node(b){}
+    SimpleNode(uint numOutputs) : Node(numOutputs){}
     virtual ~SimpleNode(){}
 
 protected:

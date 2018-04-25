@@ -12,6 +12,14 @@ int main(int argc, char *argv[])
     Topology t = {10,20,10};
     Model *model = new Model(t);
 
+    vector <fp> inputVals;
+    model->feedFoward(inputVals);
+
+    vector <fp> targetVals;
+    model->backProp(targetVals);
+
+    vector<fp> resultVals = model->getResult();
+
 
     //auto a = new Dense(10, ActivationFunctions::Sigmoid);
 
