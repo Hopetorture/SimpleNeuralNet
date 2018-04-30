@@ -5,7 +5,7 @@ Dense::Dense(int neuronCount, ActivationFunctions fn, uint nextLayerSize, int dr
     : Layer(neuronCount, fn, dropout_)
 {
     for (int i = 0; i <= neurons; i++){ // <= - to add an additional neuron - bias
-        Node* node = new SimpleNode(nextLayerSize);    //UB place, hope for no exceptions
+        Node* node = new SimpleNode(nextLayerSize, i);    //UB place, hope for no exceptions
         auto node_ptr = std::unique_ptr<Node>(node);
         std::srand(unsigned(std::time(nullptr))); // todo - fix later
         fp rnd = ((fp)std::rand()/ (RAND_MAX) );
