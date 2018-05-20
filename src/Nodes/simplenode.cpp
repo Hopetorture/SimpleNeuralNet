@@ -12,26 +12,26 @@ void SimpleNode::calcOutputGradients(fp targetVal)
 
 }
 
-void SimpleNode::calcHiddenGradients(const Layer &nextLayer)
+void SimpleNode::calcHiddenGradients(const NodeVec &nextLayer)
 {
     fp dow = sumDOW(nextLayer);
     m_gradient = dow * act->derivative(m_outputVal);
 }
 
-void SimpleNode::updateInputWeights(const Layer &prevLayer)
+void SimpleNode::updateInputWeights(const NodeVec &prevLayer)
 {
     for (uint n = 0; n < prevLayer.size(); ++n){
-        Node &neuron = prevLayer[n];
-        fp oldDeltaWeight = neuron.m_outputWeights[m_myIndex].deltaWeight;
-        fp newDeltaWeight = Node::eta *neuron.getOutputVal() * m_gradient + Node::alpha * oldDeltaWeight;
+        std::shared_ptr<Node> neuron = prevLayer.at(n);
+        fp oldDeltaWeight = neuron->m_outputWeights[m_myIndex].deltaWeight;
+        fp newDeltaWeight = Node::eta * neuron->getOutputVal() * m_gradient + Node::alpha * oldDeltaWeight;
     }
 }
 
-fp SimpleNode::sumDOW(const Layer &nextLayer)
+fp SimpleNode::sumDOW(const NodeVec &nextLayer) const
 {
-    double sum = 0.0;
+    fp sum = 0.0;
     for  (uint n = 0; n < nextLayer.size() - 1; ++n ){
-        sum += m_outputWeights[n].weight * nextLayer[n].m_gradient;
+        sum += m_outputWeights[n].weight * nextLayer[n]->m_gradient;
     }
     return sum;
 }
@@ -40,7 +40,7 @@ void SimpleNode::In(const std::vector<fp> &in, const std::vector<fp> &weight)
 {
     this->sum = 0.0;
     for (uint i = 0; i < in.size(); i++){
-        sum += in.at(i) * weight;
+        sum += in.at(i) * weight.at(i);
     }
 }
 

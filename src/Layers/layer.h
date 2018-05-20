@@ -19,12 +19,17 @@ public:
     Layer (const Layer&) = delete;
     Layer& operator= (const Layer&) = delete;
 
+    int size(){return nodeLayer.size();}
+    std::shared_ptr<Node>/*&*/ at(int i){ return nodeLayer.at(i);}
+    std::shared_ptr<Node>/*&*/ operator[](int i){return nodeLayer.at(i);}
+    NodeVec getNodeVec(){return nodeLayer;}
+
 protected:
     int neurons;
     int droupoutRate;
     ActivationFunctions activator;
     ConnectionType connections_t;
-    std::vector<std::unique_ptr<Node> > nodeLayer;
+    std::vector<std::shared_ptr<Node> > nodeLayer;
 
 };
 

@@ -3,6 +3,7 @@
 #include "Models/abstractmodel.h"
 #include "Layers/dense.h"
 #include <cassert>
+#include <iostream>
 //#include "Nodes/activation.h"
 //#include "Nodes/activatorsfactory.h"
 

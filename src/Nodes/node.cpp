@@ -7,3 +7,6 @@ Node::Node(uint numOutputs, uint myIndex){
     m_myIndex = myIndex;
 }
 
+fp Node::eta = 0.15; // todo - make config
+fp Node::alpha = 0.5;
+

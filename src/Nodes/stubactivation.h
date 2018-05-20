@@ -3,6 +3,7 @@
 
 #include "activation.h"
 #include <cmath>
+#include <iostream>
 
 class StubActivation : public Activation
 {

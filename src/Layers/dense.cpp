@@ -6,7 +6,7 @@ Dense::Dense(int neuronCount, ActivationFunctions fn, uint nextLayerSize, int dr
 {
     for (int i = 0; i <= neurons; i++){ // <= - to add an additional neuron - bias
         Node* node = new SimpleNode(nextLayerSize, i);    //UB place, hope for no exceptions
-        auto node_ptr = std::unique_ptr<Node>(node);
+        auto node_ptr = std::shared_ptr<Node>(node);
         std::srand(unsigned(std::time(nullptr))); // todo - fix later
         fp rnd = ((fp)std::rand()/ (RAND_MAX) );
         if (rnd > 1 || rnd < 0){std::cout << "Error in random generation in DenseLayer!" << std::endl;}
