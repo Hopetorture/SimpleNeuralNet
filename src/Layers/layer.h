@@ -23,6 +23,7 @@ public:
     std::shared_ptr<Node>/*&*/ at(int i){ return nodeLayer.at(i);}
     std::shared_ptr<Node>/*&*/ operator[](int i){return nodeLayer.at(i);}
     NodeVec getNodeVec(){return nodeLayer;}
+    std::shared_ptr<Node> back(){return nodeLayer.back();}
 
 protected:
     int neurons;
@@ -30,6 +31,7 @@ protected:
     ActivationFunctions activator;
     ConnectionType connections_t;
     std::vector<std::shared_ptr<Node> > nodeLayer;
+    std::string description = "default";
 
 };
 

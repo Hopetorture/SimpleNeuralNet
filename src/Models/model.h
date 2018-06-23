@@ -19,8 +19,7 @@ public:
 
 private:
     std::vector<Layer*> m_layers; //todo - delete layers
-    fp m_error = 0.0;
-    fp m_recentAverageError;
+    fp m_error = 0.0;    
     fp m_recentAverageSmoothingFactor;
     auto getActivation(){return ActivationFunctions::Sigmoid;}
 

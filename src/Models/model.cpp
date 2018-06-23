@@ -1,21 +1,26 @@
 #include "model.h"
+#include <QMap>
 
 Model::Model(Topology t)
 {
     uint numLayers = t.size();
-
+    QMap<int, std::string> debugMap;
+    debugMap.insert(0, std::string("first Layer"));
+    debugMap.insert(1, std::string("hidden Layer"));
+    debugMap.insert(2, std::string("output Layer"));
     for (uint i = 0; i < numLayers; i++){
         uint nextLayerOutputs = i == t.size() - 1 ? 0 : t.at(i+1);
-        m_layers.push_back(new Dense(t.at(i), getActivation(), nextLayerOutputs));
+        m_layers.push_back(new Dense(t.at(i), getActivation(), nextLayerOutputs, debugMap.value(i)));
 
     }
-    //m_layers.back()->setOutputVal(-1.0);
-    std::cout << "FIX THIS!!! 1234" << std::endl;
+    m_layers.back()->back()->setOutputValue(1.0);
+    //m_layers.back()->
+    //std::cout << "FIX THIS!!! 1234" << std::endl;
 }
 
 Model::~Model(){
     //delete m_layers;
-    for (auto e : m_layers)
+    for (auto &e : m_layers)
         delete e;
 }
 
@@ -31,9 +36,10 @@ void Model::feedFoward(const std::vector<fp> &inputVals)
     for (uint layerNum = 1; layerNum < m_layers.size(); ++layerNum){
         auto prevLayer = m_layers[layerNum - 1];
         for (uint n = 0; n < m_layers[layerNum]->size() - 1; ++n){ // -1 for bias neuron
+            m_layers[layerNum]->at(n)->feedForward(prevLayer);
             ///m_layers[layerNum]->at(n)->feedForward(prevLayer);
             /// CHECK EXAMPLE CODE,  what should actually get called here?
-            std::cout << "Fix me here" << std::endl;
+            //std::cout << "Fix me here" << std::endl;
         }
     }
 }

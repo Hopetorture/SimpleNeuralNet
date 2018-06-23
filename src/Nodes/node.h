@@ -9,6 +9,8 @@
 #include <memory>
 #include <cstdlib>
 
+class Layer;
+
 class Connection{
 public:
     Connection(){
@@ -26,7 +28,7 @@ class Node
 {
 public:
     //enum class ActivationMethod {};
-    Node(){}
+    //Node(){}
     Node(uint numOutputs, uint myIndex);
     virtual ~Node(){}
 
@@ -49,6 +51,7 @@ public:
     virtual void calcHiddenGradients(const NodeVec &nextLayer) = 0;
     virtual fp sumDOW(const NodeVec &nextLayer) const = 0;
     virtual void updateInputWeights(const NodeVec &prevLayer) = 0;
+    virtual void feedForward(Layer* prevLayer) = 0;
 
     std::vector<Connection> m_outputWeights;
     fp m_gradient = 0.0;

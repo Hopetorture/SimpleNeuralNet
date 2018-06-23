@@ -1,7 +1,7 @@
 TEMPLATE = app
 CONFIG += console c++14
 CONFIG -= app_bundle
-CONFIG -= qt
+CONFIG += qt
 #CONFIG += c++14
 
 INCLUDEPATH += $${PWD}/src
@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     src/Layers/dense.cpp \
     src/Nodes/simplenode.cpp \
     src/Models/abstractmodel.cpp \
-    src/Models/model.cpp
+    src/Models/model.cpp \
+    src/datafeed.cpp
 
 HEADERS += \
     src/Nodes/node.h \
@@ -28,4 +29,5 @@ HEADERS += \
     src/Layers/dense.h \
     src/Nodes/simplenode.h \
     src/Models/abstractmodel.h \
-    src/Models/model.h
+    src/Models/model.h \
+    src/datafeed.h

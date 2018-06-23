@@ -1,9 +1,11 @@
 #include "simplenode.h"
+#include "Layers/layer.h"
+#include "Layers/dense.h"
+#include <QDebug>
+//SimpleNode::SimpleNode()
+//{
 
-SimpleNode::SimpleNode()
-{
-
-}
+//}
 
 void SimpleNode::calcOutputGradients(fp targetVal)
 {
@@ -22,9 +24,25 @@ void SimpleNode::updateInputWeights(const NodeVec &prevLayer)
 {
     for (uint n = 0; n < prevLayer.size(); ++n){
         std::shared_ptr<Node> neuron = prevLayer.at(n);
+        qDebug() << neuron->m_outputWeights.size() << " < ow size";
         fp oldDeltaWeight = neuron->m_outputWeights[m_myIndex].deltaWeight;
         fp newDeltaWeight = Node::eta * neuron->getOutputVal() * m_gradient + Node::alpha * oldDeltaWeight;
+        neuron->m_outputWeights[m_myIndex].deltaWeight = newDeltaWeight;
+        neuron->m_outputWeights[m_myIndex].weight += newDeltaWeight;
     }
+}
+
+void SimpleNode::feedForward(Layer *prevLayer)
+{
+    double sum = 0.0;
+    for(unsigned n = 0 ; n < prevLayer->size(); ++n)
+        {
+            sum += prevLayer->at(n)->getOutputVal() *
+                     prevLayer->at(n)->m_outputWeights[m_myIndex].weight;
+        }
+
+        m_outputVal = act->derivative(m_outputVal);
+
 }
 
 fp SimpleNode::sumDOW(const NodeVec &nextLayer) const

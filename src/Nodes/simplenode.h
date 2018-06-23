@@ -13,6 +13,7 @@ public:
     virtual void calcHiddenGradients(const NodeVec &nextLayer) override;
     virtual fp sumDOW(const NodeVec &nextLayer) const override ;
     virtual void updateInputWeights(const NodeVec &prevLayer) override;
+    virtual void feedForward(Layer* prevLayer)override;
 protected:
     virtual void In(const std::vector<fp> &in, const std::vector<fp> &weight);
     virtual void Activate();
