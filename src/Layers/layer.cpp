@@ -10,3 +10,5 @@ Layer::Layer(int neuronCount, ActivationFunctions fn, int dropout_)
 {
 
 }
+
+

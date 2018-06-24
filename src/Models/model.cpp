@@ -82,7 +82,7 @@ void Model::backProp(const std::vector<fp> &targetVals)
     // For all layers from outputs to first hidden layer, update connection weights
     for (uint layerNum = m_layers.size() - 1;  layerNum > 0; --layerNum){
         Layer *layer = m_layers[layerNum];
-        Layer *prevLayer = m_layers[layerNum];
+        Layer *prevLayer = m_layers[layerNum - 1];
 
         for (uint n = 0; n < layer->size() - 1; ++n){
             layer->at(n)->updateInputWeights(prevLayer->getNodeVec());
@@ -99,4 +99,11 @@ std::vector<fp> Model::getResult()
         res.push_back(m_layers.back()->at(n)->getOutputVal());
     }
     return res;
+}
+
+void Model::debug()
+{
+    for (Layer* l : m_layers){
+        l->debug();
+    }
 }

@@ -16,6 +16,7 @@ public:
     virtual void feedFoward(const std::vector<fp> &inputVals)override;
     virtual void backProp(const std::vector<fp> &targetVals)override;
     virtual std::vector<fp>getResult()override;
+    void debug()override;
 
 private:
     std::vector<Layer*> m_layers; //todo - delete layers

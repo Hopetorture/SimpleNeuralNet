@@ -15,6 +15,7 @@ public:
     virtual void backProp(const std::vector<fp> &targetVals)=0;
     virtual std::vector<fp> getResult()=0;
     fp getRecentAverageError(){return m_recentAverageError;}
+    virtual void debug() = 0;
 protected:
     fp m_recentAverageError;
 };

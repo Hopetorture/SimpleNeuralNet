@@ -9,7 +9,7 @@ public:
     virtual ~Activation(){}
     virtual fp operator()(const fp &in) = 0;
     fp activate(const fp &in){
-        this->operator ()(in);
+        return this->operator ()(in);
     }
     virtual fp derivative(const fp &in)=0;
 };

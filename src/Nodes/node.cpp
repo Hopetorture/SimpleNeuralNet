@@ -1,4 +1,5 @@
 #include "node.h"
+#include <math.h>
 #include <QDebug>
 
 Node::Node(uint numOutputs, uint myIndex){
@@ -8,6 +9,13 @@ Node::Node(uint numOutputs, uint myIndex){
     }
     m_myIndex = myIndex;
     qDebug() << "m_output weights size = " << m_outputWeights.size();
+}
+
+fp Node::getOutputVal(){
+        if(std::isnan(m_outputVal)){
+            qDebug() << "outputValue is nan";
+        }
+    return m_outputVal;
 }
 
 fp Node::eta = 0.15; // todo - make config

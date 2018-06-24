@@ -12,6 +12,7 @@ public:
 
     Dense (const Dense&) = delete;
     Dense& operator= (const Dense&) = delete;    
+    void debug() override;
 };
 
 #endif // DENSE_H

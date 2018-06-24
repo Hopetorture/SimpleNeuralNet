@@ -33,13 +33,13 @@ public:
     virtual ~Node(){}
 
     void setOutputValue(fp val){ this->m_outputVal = val; }
-    fp getOutputVal(){return this->m_outputVal;}
-    fp outputValue() const { return m_outputVal; }
-    fp calculate(const std::vector<fp> &in, const std::vector<fp> &weight){
-        In(in, weight);
-        Activate();
-        return Out();
-    }
+    fp getOutputVal();
+    //fp outputValue() const { return m_outputVal; }
+//    fp calculate(const std::vector<fp> &in, const std::vector<fp> &weight){
+//        In(in, weight);
+//        Activate();
+//        return Out();
+//    }
 
     void setParams(fp bias, std::shared_ptr<Activation> &a){
         //this->bias = bias; // todo - change sign
@@ -52,12 +52,13 @@ public:
     virtual fp sumDOW(const NodeVec &nextLayer) const = 0;
     virtual void updateInputWeights(const NodeVec &prevLayer) = 0;
     virtual void feedForward(Layer* prevLayer) = 0;
+    virtual void debug()=0;
 
     std::vector<Connection> m_outputWeights;
     fp m_gradient = 0.0;
 
 protected:
-    fp m_outputVal;
+    fp m_outputVal = 0.0;
     fp sum = 0.0; //summ of incoming signals * weights
     uint m_myIndex;
     static fp eta; // [0.0 ... 1.0] overall net training rate
@@ -65,9 +66,9 @@ protected:
     //fp bias;
     std::shared_ptr<Activation> act;
 
-    virtual void In(const std::vector<fp> &in, const std::vector<fp> &weight) = 0;
-    virtual void Activate() = 0;
-    virtual fp Out() = 0;
+    //virtual void In(const std::vector<fp> &in, const std::vector<fp> &weight) = 0;
+    //virtual void Activate() = 0;
+    //virtual fp Out() = 0;
 
 };
 

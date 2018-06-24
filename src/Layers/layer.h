@@ -24,6 +24,7 @@ public:
     std::shared_ptr<Node>/*&*/ operator[](int i){return nodeLayer.at(i);}
     NodeVec getNodeVec(){return nodeLayer;}
     std::shared_ptr<Node> back(){return nodeLayer.back();}
+    virtual void debug() = 0;
 
 protected:
     int neurons;
