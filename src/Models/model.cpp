@@ -96,8 +96,7 @@ void Model::backProp(const std::vector<fp> &targetVals)
 std::vector<fp> Model::getResult()
 {
     std::vector<fp> res;
-    for (uint n = 0; n < m_layers.size() - 1; ++n){
-
+    for (uint n = 0; n < m_layers.back()->size() - 1; ++n){
         res.push_back(m_layers.back()->at(n)->getOutputVal());
     }
     return res;

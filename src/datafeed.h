@@ -61,7 +61,11 @@ private:
             newAnimal.boolAttribs.push_back(qsl[i].toInt());
             newAnimal.naiveVec.push_back(qsl[i].toDouble());
         }
+        //newAnimal.type = qsl[17].toInt();
         newAnimal.type = qsl.back().toInt();
+        qDebug() << qsl;
+        //int zz;
+        //std::cin >> zz;
         dataset.push_back(newAnimal);
         //newAnimal.naiveVec.push_back(qsl.back().toDouble());
     }
