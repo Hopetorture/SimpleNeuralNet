@@ -12,7 +12,61 @@ struct DE{
     double y;
     double out;
 };
+struct Animal{
+    QString name;
+    fp fpName;
+    std::vector<bool> boolAttribs;
+    int legs;
+    int type;
+    std::vector<fp> naiveVec;
+};
+class ZooDataFeed{
+public:
+    void load(const QString &path){
+        QFile data(path);
+        if (!data.open(QIODevice::ReadOnly | QIODevice::Text))
+            qWarning() << "Could not open a dataset";
+        QTextStream ts(&data);
+        while (!ts.atEnd()){
+            parse(ts.readLine().split(","));
+        }
+    }
+    std::vector<Animal> dataset;
+    Animal next(){
+        size_t current = datasetIndex;
+        datasetIndex++;
+        return dataset[current];
+    }
+    bool hasNext(){
+        if (dataset.size() > datasetIndex)
+            return true;
+        else
+            return false;
+    }
+    size_t datasetIndex = 0;
+private:
+    void parse(QStringList qsl){
+        //qDebug() << qsl;
+        Animal newAnimal;
+        newAnimal.name = qsl[0];
+        newAnimal.fpName = newAnimal.name.toDouble();
+        newAnimal.naiveVec.push_back(newAnimal.fpName);
+        for (int i = 1; i < 13; i++){
+            QString b = qsl[i];
+            newAnimal.boolAttribs.push_back(b.toInt());
+            newAnimal.naiveVec.push_back(b.toDouble());
+        }
+        newAnimal.legs = qsl[13].toInt();
+        for (int i = 14; i < 16; i++){
+            newAnimal.boolAttribs.push_back(qsl[i].toInt());
+            newAnimal.naiveVec.push_back(qsl[i].toDouble());
+        }
+        newAnimal.type = qsl.back().toInt();
+        dataset.push_back(newAnimal);
+        //newAnimal.naiveVec.push_back(qsl.back().toDouble());
+    }
 
+};
 class DataFeed
 {
 public:

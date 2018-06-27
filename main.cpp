@@ -6,9 +6,7 @@
 #include "datafeed.h"
 using namespace std;
 
-
-int main(int argc, char *argv[])
-{
+void main1(){
     cout << "Hello World!" << endl;
     Topology t = {2,4,1};
     Model *model = new Model(t);
@@ -33,22 +31,44 @@ int main(int argc, char *argv[])
     qDebug() << "passes: " << pass;
     int stop;
     std::cin >> stop;
-    //feed.load("./data.txt");
+}
 
-//    vector <fp> inputVals;
-//    model->feedFoward(inputVals);
+void main2(){
+    Topology t = {15,40,7};
+    Model *model = new Model(t);
+    ZooDataFeed feed;
+    feed.load("D:/Projects/build-SNNLib-Desktop_Qt_5_8_0_MinGW_32bit-Debug/debug/data_zoo.txt");
+    //model->debug();
+    size_t pass = 0;
 
-//    vector <fp> targetVals;
-//    model->backProp(targetVals);
 
-//    vector<fp> resultVals = model->getResult();
+    while(feed.hasNext()){
+        pass++;
+        auto next = feed.next();
+        auto rawNext = next.naiveVec;
+        model->feedFoward(rawNext);
+        auto resultVals = model->getResult();
+        qDebug() << "Output values: " << resultVals;
+        qDebug() << "Target values: " << next.type;
+        //assert(t.back() == 1);
+        std::vector<fp>correctVec = {0,0,0,0,0,0,0};
+        correctVec.at(next.type - 1) = 1;
+        model->backProp(correctVec);
 
-//    std::cout << "resultVals" << std::endl;
-//    for (auto elem : resultVals){
-//        std::cout << elem << std::endl;
-//    }
+        qDebug() << "Net recent average error: " << model->getRecentAverageError();
+        if (pass == 500)  break;
+        if (pass %100){
+            feed.datasetIndex = 0;
+        }
+    }
+    qDebug() << "passes: " << pass;
+    int stop;
+    std::cin >> stop;
+}
 
-    //auto a = new Dense(10, ActivationFunctions::Sigmoid);
-
+int main(int argc, char *argv[])
+{
+    main1();
+    //main2();
     return 0;
 }

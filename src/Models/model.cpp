@@ -27,6 +27,7 @@ Model::~Model(){
 void Model::feedFoward(const std::vector<fp> &inputVals)
 {
     //m_layers.at(0);
+    //qDebug()<< "feed forward: "<<"in: " << inputVals.size() << " expected: " << m_layers[0]->size() - 1;
     assert(inputVals.size() == m_layers[0]->size() - 1 ); //debug check, -1 for bias neuron
     //assign the input vals into neurons
     for (uint i = 0; i < inputVals.size(); ++i){
@@ -46,6 +47,7 @@ void Model::feedFoward(const std::vector<fp> &inputVals)
 
 void Model::backProp(const std::vector<fp> &targetVals)
 {
+    //qDebug() << "back prop started";
     //calculate overall net error (Root mean square error of output neuron errors)
     Layer* outputLayer = m_layers.back();
     m_error = 0.0;
