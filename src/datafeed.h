@@ -50,7 +50,7 @@ private:
         Animal newAnimal;
         newAnimal.name = qsl[0];
         newAnimal.fpName = newAnimal.name.toDouble();
-        newAnimal.naiveVec.push_back(newAnimal.fpName);
+        //newAnimal.naiveVec.push_back(newAnimal.fpName);
         for (int i = 1; i < 13; i++){
             QString b = qsl[i];
             newAnimal.boolAttribs.push_back(b.toInt());

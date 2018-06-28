@@ -44,6 +44,11 @@ void SimpleNode::feedForward(Layer *prevLayer)
         }
 
         m_outputVal = act->activate(sum);
+//        int dbg;
+//        qDebug() << "Node output: "  << m_outputVal;
+//        int dbg1;
+//        int dbg2;
+//        int dbg3;
 
 }
 

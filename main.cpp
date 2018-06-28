@@ -34,7 +34,7 @@ void main1(){
 }
 
 void main2(){
-    Topology t = {15,40,7};
+    Topology t = {14,8,8,8,7};
     Model *model = new Model(t);
     ZooDataFeed feed;
     feed.load("D:/Projects/build-SNNLib-Desktop_Qt_5_8_0_MinGW_32bit-Debug/debug/data_zoo.txt");
@@ -53,6 +53,8 @@ void main2(){
         qDebug() << "Output values: " << resultVals;
         //assert(t.back() == 1);
         std::vector<fp>correctVec = {0,0,0,0,0,0,0};
+        //std::vector<fp>correctVec = {-1,-1,-1,-1,-1,-1,-1};
+        //std::vector<fp>correctVec = {-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5};
         correctVec[next.type - 1] = 1;
         qDebug() << next.name;
         qDebug() << "type: " << next.type;
@@ -60,12 +62,14 @@ void main2(){
         model->backProp(correctVec);
 
         qDebug() << "Net recent average error: " << model->getRecentAverageError();
-        if (pass2 == 500)  break;
+        if (pass2 == 1500)  break;
         if (pass == 100){
+            pass = 0;
             feed.datasetIndex = 0;
         }
     }
     qDebug() << "passes: " << pass;
+    qDebug() << "passes2: " << pass2;
     int stop;
     std::cin >> stop;
 }
